@@ -27,5 +27,16 @@ get '/' do
     away_score: 21
   }
 ]
+
+  @leaderboard = @results
   erb :index
+end
+
+get '/results/:team_name' do
+  @team = params[:team_name]
+  erb :team_template
+end
+
+get '/leaderboard/' do
+  erb :leaderboard
 end

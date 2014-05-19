@@ -1,0 +1,25 @@
+<! DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>NFL Standings</title>
+    </head>
+
+    <body>
+      <h1>NFL Standings</h1>
+      <h2><a href="/leaderboard/">Leaderboard</a></h2>
+      <h2>Teams</h2>
+      <ul>
+        <% results_hold = [] %>
+        <% @results.each do |bracket| %>
+          <% if !results_hold.include?(bracket[:home_team]) %>
+            <li><a href="/results/<%= bracket[:home_team] %>"><%= bracket[:home_team] %></a></li>
+            <% results_hold.push bracket[:home_team] %>
+          <% end %>
+          <% if !results_hold.include?(bracket[:away_team]) %>
+            <li><a href="/results/<%= bracket[:away_team] %>"><%= bracket[:away_team] %></a></li>
+            <% results_hold.push bracket[:away_team] %>
+          <% end %>
+        <% end %>
+      </ul>
+    </body>
+</html>
