@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title><%= @team %></title>
+  </head>
+
+  <body>
+    <h1><%= @team %></h1>
+    <h3>Results</h3>
+      <ul>
+        <% wins = 0 %>
+        <% losses = 0 %>
+        <% RESULTS.each do |bracket| %>
+          <% if bracket[:home_team] == @team || bracket[:away_team] == @team %>
+            <li><%= "#{bracket[:home_team]} #{bracket[:home_score]} #{bracket[:away_team]} #{bracket[:away_score]}" %></li>
+          <% end %>
+          <% if bracket[:home_team] == @team %>
+            <% if bracket[:home_score] > bracket[:away_score] %>
+              <% wins += 1 %>
+            <% else %>
+              <% losses += 1 %>
+            <% end %>
+          <% end %>
+          <% if bracket[:away_team] == @team %>
+            <% if bracket[:away_score] > bracket[:home_score] %>
+              <% wins += 1 %>
+            <% else %>
+              <% losses +=1 %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+      <p><%= "Record: #{wins} - #{losses}" %></p>
+  </body>
+  </html>

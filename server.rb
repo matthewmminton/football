@@ -1,17 +1,6 @@
 require 'sinatra'
 
-get '/' do
-  @teams = ["Patriots", "Broncos", "Colts", "Steelers"]
-  erb :index
-end
-
-get '/teams/:team_name' do
-  @team = params[:team_name]
-  erb :team_template
-end
-
-get '/leaderboard/' do
-  @leaderboard = [
+RESULTS = [
   {
     home_team: "Patriots",
     away_team: "Broncos",
@@ -38,5 +27,16 @@ get '/leaderboard/' do
   }
 ]
 
+get '/' do
+  @teams = ["Patriots", "Broncos", "Colts", "Steelers"]
+  erb :index
+end
+
+get '/teams/:team_name' do
+  @team = params[:team_name]
+  erb :team_template
+end
+
+get '/leaderboard/' do
   erb :leaderboard
 end
