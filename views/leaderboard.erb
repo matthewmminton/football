@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>Leaderboard</title>
+    </head>
+      <h2>Leaderboard</h2>
+      <ul>
+        <% @leaderboard.each do |bracket| %>
+        <li><%= bracket[:home_team] %></li>
+        <% end %>
+      </ul>
+    <body>
+    </body>
+  </html>
