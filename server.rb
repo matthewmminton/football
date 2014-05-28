@@ -43,6 +43,32 @@ end
 
 get '/teams/:team_name' do
   @team = params[:team_name]
+  @wins = 0
+  @losses = 0
+  RESULTS.each do |bracket|
+    if bracket[:home_team] == @team
+      if bracket[:home_score] > bracket[:away_score]
+        @wins += 1
+      else
+        @losses += 1
+      end
+    end
+    if bracket[:away_team] == @team
+      if bracket[:away_score] > bracket[:home_score]
+        @wins += 1
+      else
+        @losses += 1
+      end
+    end
+  end
+
+  @scoreline = []
+  RESULTS.each do |bracket|
+    if bracket[:home_team] == @team || bracket[:away_team] == @team
+      @scoreline << "#{bracket[:home_team]} #{bracket[:home_score]} #{bracket[:away_team]} #{bracket[:away_score]}"
+    end
+  end
+
   erb :team_template
 end
 
