@@ -28,7 +28,16 @@ RESULTS = [
 ]
 
 get '/' do
-  @teams = ["Patriots", "Broncos", "Colts", "Steelers"]
+  @teams = []
+  RESULTS.each do |hash|
+    if !@teams.include?(hash[:home_team])
+      @teams << hash[:home_team]
+    end
+    if !@teams.include?(hash[:away_team])
+      @teams << hash[:away_team]
+    end
+  end
+
   erb :index
 end
 
