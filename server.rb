@@ -73,5 +73,39 @@ get '/teams/:team_name' do
 end
 
 get '/leaderboard/' do
+  @teams_1 = []
+    RESULTS.each do |hash|
+      if !@teams_1.include?(hash[:home_team])
+        @teams_1 << hash[:home_team]
+      end
+      if !@teams_1.include?(hash[:away_team])
+        @teams_1 << hash[:away_team]
+      end
+    end
+
+    @unordered_teams = []
+    @teams_1.each do |team|
+      @wins_1 = 0
+      @losses_1 = 0
+      RESULTS.each do |hash|
+        if hash[:home_team] == team && hash[:home_score] > hash[:away_score]
+          @wins_1 += 1
+        end
+        if hash[:home_team] == team && hash[:home_score] < hash[:away_score]
+          @losses_1 += 1
+        end
+        if hash[:away_team] == team
+          if hash[:home_score] < hash[:away_score]
+            @wins_1 += 1
+          else
+            @losses_1 += 1
+          end
+        end
+      end
+      @unordered_teams << {team: team, wins: @wins_1, losses: @losses_1}
+    end
+
+    @updated_leaderboard = @unordered_teams.sort_by {|h| [ h[:wins], h[:losses] ]}.reverse
+
   erb :leaderboard
 end

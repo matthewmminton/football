@@ -7,87 +7,10 @@
     <body>
       <h2>Leaderboard</h2>
 
-        <% patriots_wins = 0 %>
-        <% patriots_losses = 0 %>
-        <% broncos_wins = 0 %>
-        <% broncos_losses = 0 %>
-        <% colts_wins = 0 %>
-        <% colts_losses = 0 %>
-        <% steelers_wins = 0 %>
-        <% steelers_losses = 0 %>
-
-        <% RESULTS.each do |bracket| %>
-          <% if bracket[:home_team] == "Patriots" %>
-            <% if bracket[:home_score] > bracket[:away_score] %>
-              <% patriots_wins += 1 %>
-            <% else %>
-              <% patriots_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:away_team] == "Patriots" %>
-            <% if bracket[:away_score] > bracket[:home_score] %>
-              <% patriots_wins += 1 %>
-            <% else %>
-              <% patriots_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:home_team] == "Broncos" %>
-            <% if bracket[:home_score] > bracket[:away_score] %>
-              <% broncos_wins += 1 %>
-            <% else %>
-              <% broncos_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:away_team] == "Broncos" %>
-            <% if bracket[:away_score] > bracket[:home_score] %>
-              <% broncos_wins += 1 %>
-            <% else %>
-              <% broncos_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:home_team] == "Colts" %>
-            <% if bracket[:home_score] > bracket[:away_score] %>
-              <% colts_wins += 1 %>
-            <% else %>
-              <% colts_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:away_team] == "Colts" %>
-            <% if bracket[:away_score] > bracket[:home_score] %>
-              <% colts_wins += 1 %>
-            <% else %>
-              <% colts_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:home_team] == "Steelers" %>
-            <% if bracket[:home_score] > bracket[:away_score] %>
-              <% steelers_wins += 1 %>
-            <% else %>
-              <% steelers_losses += 1 %>
-            <% end %>
-          <% end %>
-          <% if bracket[:away_team] == "Steelers" %>
-            <% if bracket[:away_score] > bracket[:home_score] %>
-              <% steelers_wins += 1 %>
-            <% else %>
-              <% steelers_losses += 1 %>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <% records_hash = [
-          {team: "Patriots", wins: patriots_wins, losses: patriots_losses},
-          {team: "Steelers", wins: steelers_wins, losses: steelers_losses},
-          {team: "Colts", wins: colts_wins, losses: colts_losses},
-          {team: "Broncos", wins: broncos_wins, losses: broncos_losses}] %>
-
-        <% updated_hash = records_hash.sort_by {|h| [ h[:wins], h[:losses] ]}.reverse %>
-
         <ol>
-          <li><%= "TEAM: #{records_hash[0][:team]} WINS: #{updated_hash[0][:wins]} LOSSES: #{updated_hash[0][:losses]}" %></li>
-          <li><%= "TEAM: #{records_hash[1][:team]} WINS: #{updated_hash[1][:wins]} LOSSES: #{updated_hash[1][:losses]}" %></li>
-          <li><%= "TEAM: #{records_hash[2][:team]} WINS: #{updated_hash[2][:wins]} LOSSES: #{updated_hash[2][:losses]}" %></li>
-          <li><%= "TEAM: #{records_hash[3][:team]} WINS: #{updated_hash[3][:wins]} LOSSES: #{updated_hash[3][:losses]}" %></li>
+          <% @updated_leaderboard.each do |entry| %>
+            <li><%= "TEAM: #{entry[:team]} WINS: #{entry[:wins]} LOSSES: #{entry[:losses]}" %></li>
+          <% end %>
         </ol>
 
     </body>
