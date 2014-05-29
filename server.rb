@@ -105,7 +105,7 @@ get '/leaderboard/' do
       @unordered_teams << {team: team, wins: @wins_1, losses: @losses_1}
     end
 
-    @updated_leaderboard = @unordered_teams.sort_by {|h| [ h[:wins], h[:losses] ]}.reverse
+    @updated_leaderboard = @unordered_teams.sort_by {|h| [ h[:wins], -h[:losses] ]}.reverse
 
   erb :leaderboard
 end
